@@ -1,0 +1,49 @@
+@layout('layouts.main')
+
+@section('title')
+Publicaciones - Edita tu Trabajo
+@endsection
+
+@section('extracss')
+{{ style('forms') }}
+@endsection
+
+@section('content')
+  <h1>Editar Trabajo</h1>
+
+
+  <div class="job-container">
+    @if(flashMessage('message'))
+        <span>{{ flashMessage('message') }}</span>
+    @endif
+        <form action="{{ route('JobController.update', { id: job.id }) }}" method="POST">
+          {{ csrfField() }}
+  
+          <label for="title">Título</label>
+          <input type="text" name="title" value="{{ job.title }}">
+          @if(hasErrorFor('title'))
+              <span>
+                  {{ getErrorFor('title') }}
+              </span>
+          @endif
+  
+          <label for="link">Link URL</label>
+          <input type="text" name="link" value="{{ job.link }}">
+          @if(hasErrorFor('link'))
+              <span>
+                  {{ getErrorFor('link') }}
+              </span>
+          @endif
+  
+          <label for="description">Descripción</label>
+          <input type="text" name="description" value="{{ job.description }}">
+          @if(hasErrorFor('description'))
+              <span>
+                  {{ getErrorFor('description') }}
+              </span>
+          @endif
+  
+          <button type="submit">Actualizar Trabajo!</button><br>
+        </form>
+    </div>
+@endsection

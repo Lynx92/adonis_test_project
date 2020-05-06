@@ -1,0 +1,55 @@
+@layout('layouts.main')
+
+@section('extracss')
+
+<!-- CSS especifico del formulario  -->
+{{ style('forms') }}
+
+@endsection
+
+@section('title')
+Publicaciones - Crear cuenta
+@endsection
+
+@section('content')
+  <h1>Apúntate ahora</h1>
+
+  <div class="job-container">
+
+      <!-- Se llama la funcion create del controlador UserController  -->
+      <form action="{{ route('UserController.create') }}" method="POST">
+        <!-- El campo csrField es para generar entrada oculta que asegure que la respuesta es desde nuestro servidor  -->
+        {{ csrfField() }}
+
+        <label for="username">Nombre de usuario</label>
+
+        <!-- Se utiliza funcion old() de adonis para mantener persistente los datos del formulario si un error aparece  -->
+        <input type="text" name="username" value="{{ old('username', '') }}">
+
+        <!-- Se utiliza la funcion de Adonis hasErrorFor('field') para mostrar los errores de validacion  -->
+        @if(hasErrorFor('username'))
+            <span>
+                {{ getErrorFor('username') }}
+            </span>
+        @endif
+
+        <label for="email">Email</label>
+        <input type="email" name="email" value="{{ old('email', '') }}">
+        @if(hasErrorFor('email'))
+            <span>
+                {{ getErrorFor('email') }}
+            </span>
+        @endif
+
+        <label for="password">Contraseña</label>
+        <input type="password" name="password">
+        @if(hasErrorFor('password'))
+            <span>
+                {{ getErrorFor('password') }}
+            </span>
+        @endif
+
+        <button type="submit">Aceptar</button>
+      </form>
+  </div>
+@endsection

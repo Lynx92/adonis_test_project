@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  {{ style('style') }}
+
+  <!-- layout  -->
+  @!section('extracss')
+  
+  <title>
+    @!section('title')
+  </title>
+  <!-- /layout   -->
+
+</head>
+<body>
+
+
+  <!-- layout  -->
+  <header>
+    <a href="/" id="logo">Publicaciones</a>
+    <nav>
+      <ul>
+          <li><a href="/">Trabajos</a></li>
+          @loggedIn
+              <li><a href="/post-a-job">Mis Trabajos</a></li>
+              <li><a href="/logout">Cerrar Sesión</a></li>
+          @else
+              <li><a href="/login">Iniciar Sesión</a></li>
+              <li><a href="/signup">Crear Cuenta</a></li>
+          @endloggedIn
+      </ul>
+  </nav>
+
+  <!-- /layout -->
+
+
+  </header>
+
+  <!-- layout  -->
+  <div class="container">
+    @!section('content')
+  </div>
+  <!-- /layout  -->
+
+
+  <section>
+    <div class="logo"></div>
+    <div class="title"></div>
+    <div class="subtitle">
+    </div>
+  </section>
+</body>
+</html>
